@@ -356,7 +356,6 @@ input[readonly] {
   color: #FFD700;
   font-size: 12px;
   text-align: center;
-  margin-top: 8px;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.5s ease;
