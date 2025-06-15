@@ -226,7 +226,7 @@ body {
   color: #fff;
   opacity: 0.8;
   margin-bottom: 16px;
-  padding-top: 40px;
+  /* padding-top: 20px; */
   position: relative;
   z-index: 2;
 }
@@ -235,9 +235,9 @@ body {
   width: 400px;
   max-width: 400px;
   min-width: 400px;
-  height: 500px;
-  max-height: 500px;
-  min-height: 500px;
+  height: 400px;
+  max-height: 400px;
+  min-height: 400px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -326,10 +326,11 @@ input[readonly] {
   color: #0a0a1a;
   cursor: pointer;
   animation: pulse 2.5s infinite;
-  margin-top: 32px;
+  margin-top: 16px;
   width: 90%;
   max-width: 400px;
   height: 56px;
+  min-height: 56px;
   position: relative;
   z-index: 2;
   transition: transform 0.1s ease;
@@ -353,9 +354,9 @@ input[readonly] {
 
 .description {
   color: #FFD700;
-  font-size: 16px;
+  font-size: 12px;
   text-align: center;
-  margin-top: 16px;
+  margin-top: 8px;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.5s ease;
