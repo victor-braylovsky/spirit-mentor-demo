@@ -5,415 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ритуал</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Экран 0: Запуск ритуала */
-        .launch-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, #0a0a1a 0%, #000 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .launch-stars-background {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image:
-                radial-gradient(2px 2px at 30px 20px, #fff, transparent),
-                radial-gradient(2px 2px at 60px 90px, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(1px 1px at 100px 60px, #fff, transparent),
-                radial-gradient(1px 1px at 150px 30px, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(2px 2px at 200px 80px, #fff, transparent),
-                radial-gradient(1px 1px at 250px 40px, rgba(255, 255, 255, 0.7), transparent);
-            background-repeat: repeat;
-            background-size: 280px 120px;
-            animation: stars-twinkle 5s linear infinite;
-        }
-
-        @keyframes stars-twinkle {
-
-            0%,
-            100% {
-                opacity: 0.7;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        .dawn-animation {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(ellipse, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
-            animation: dawn-cycle 6s ease-in-out infinite;
-        }
-
-        @keyframes dawn-cycle {
-
-            0%,
-            100% {
-                background: radial-gradient(ellipse, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-
-            50% {
-                background: radial-gradient(ellipse, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-        }
-
-        .logo-container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            animation: logo-pulse 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
-        }
-
-        @keyframes logo-pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.9;
-            }
-
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-        }
-
-        .welcome-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            color: #FFD700;
-            text-align: center;
-            margin-top: 16px;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-start {
-            margin-top: 32px;
-            padding: 16px 32px;
-            font-size: 18px;
-            font-weight: 600;
-            border: none;
-            border-radius: 28px;
-            background: linear-gradient(90deg, #FFD700, #FFA500);
-            color: #1a1a2e;
-            cursor: pointer;
-            animation: button-glow 2.5s infinite;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.1s ease;
-        }
-
-        @keyframes button-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0 rgba(255, 215, 0, 0);
-            }
-
-            50% {
-                box-shadow: 0 0 16px rgba(255, 215, 0, 0.7);
-            }
-        }
-
-        .btn-start:active {
-            transform: scale(0.95);
-        }
-
-        .flash-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #fff;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        @keyframes flash {
-            0% {
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 0.8;
-            }
-
-            100% {
-                opacity: 0;
-            }
-        }
-
-        .flash-overlay.active {
-            animation: flash 0.2s forwards;
-        }
-
-        /* Экран 1: Шаг 1 */
-        .step1-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            background: linear-gradient(180deg, #0a0a1a 0%, #000 100%);
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .stars-background {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image:
-                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
-                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
-            background-repeat: repeat;
-            background-size: 200px 100px;
-            animation: twinkle 4s linear infinite;
-        }
-
-        @keyframes twinkle {
-
-            0%,
-            100% {
-                opacity: 0.8;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        .step-header {
-            font-family: 'Inter';
-            font-size: 18px;
-            color: #fff;
-            opacity: 0.8;
-            margin-bottom: 16px;
-            padding-top: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .form-card {
-            width: 350px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 400px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .field-row {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slide-in-from-top 0.8s ease-out forwards;
-        }
-
-        .field-row:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-
-        .field-row:nth-child(2) {
-            animation-delay: 0.4s;
-        }
-
-        .field-row:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        @keyframes slide-in-from-top {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .field-label {
-            color: #FFD700;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        input,
-        select {
-            flex: 1;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-            color: #fff;
-            font-size: 16px;
-            animation: input-pulse 3s infinite;
-            transition: border-color 0.3s ease;
-            width: 100%;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #FFD700;
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
-        }
-
-        input[readonly] {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-next {
-            background: linear-gradient(90deg, #FFD700, #FFA500);
-            border: none;
-            border-radius: 28px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #0a0a1a;
-            cursor: pointer;
-            animation: pulse 2.5s infinite;
-            margin-top: 32px;
-            width: 90%;
-            max-width: 400px;
-            height: 56px;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.1s ease;
-        }
-
-        .btn-next:active {
-            transform: scale(0.95);
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0 rgba(255, 215, 0, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 8px 4px rgba(255, 215, 0, 0.7);
-            }
-        }
-
-        .zodiac-sign {
-            color: #FFD700;
-            font-size: 16px;
-            text-align: center;
-            margin-top: 16px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .zodiac-sign.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Адаптивность */
-        @media (max-width: 360px) {
-            .form-card {
-                width: 100%;
-                padding: 16px;
-            }
-
-            .welcome-text {
-                font-size: 20px;
-            }
-
-            .logo {
-                width: 96px;
-                height: 96px;
-            }
-
-            .btn-start {
-                font-size: 16px;
-                padding: 14px 28px;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .logo {
-                width: 80px;
-                height: 80px;
-            }
-
-            .btn-start {
-                transform: scale(0.8);
-            }
-        }
-
-        .step-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="background-color: #000;">
     <!-- Экран 0: Запуск ритуала -->
     <div class="launch-screen" id="launchScreen">
         <div class="launch-stars-background"></div>
@@ -462,7 +57,7 @@
         <div class="stars-background"></div>
         <div class="step-container">
             <div class="step-header">
-                📜 Шаг 1 из 5
+                📜 Шаг 1 из 3
             </div>
 
             <div class="form-card">
@@ -486,7 +81,7 @@
                     </select>
                 </div>
 
-                <div class="zodiac-sign" id="zodiacSign"></div>
+                <div class="description" id="zodiacSign"></div>
             </div>
 
             <button class="btn-next" id="nextBtn">
@@ -495,119 +90,85 @@
         </div>
     </div>
 
-    <script>
-        // Переключение экранов
-        const launchScreen = document.getElementById('launchScreen');
-        const step1Screen = document.getElementById('step1Screen');
-        const flashOverlay = document.getElementById('flashOverlay');
-        const btnStart = document.querySelector('.btn-start');
+    <!-- Экран 2: Шаг 2 -->
+    <div class="step2-screen" id="step2Screen">
+        <div class="stars-background"></div>
+        <div class="step-container">
+            <div class="step-header">📜 Шаг 2 из 3</div>
+            <div class="form-card">
+                <div class="field-row">
+                    <div class="field-label">Выбор духовного пути:</div>
+                    <select id="pathSelect">
+                        <option value="">Выберите</option>
+                        <option value="tanakh">Танах</option>
+                        <option value="bible">Библия</option>
+                        <option value="quran">Коран</option>
+                        <option value="vedas">Веды</option>
+                        <option value="shamanism">Шаманизм</option>
+                        <option value="buddhism">Буддизм</option>
+                        <option value="hinduism">Индия</option>
+                        <option value="judaism">Иудаизм</option>
+                    </select>
+                </div>
 
-        btnStart.addEventListener('click', () => {
-            // Вспышка
-            flashOverlay.classList.add('active');
+                <div class="description" id="pathDescription"></div>
 
-            setTimeout(() => {
-                launchScreen.style.display = 'none';
-                step1Screen.style.display = 'flex';
-                flashOverlay.classList.remove('active');
-            }, 200);
-        });
+                <div class="field-row" style="margin-top: auto">
+                    <div class="field-label">Цели и намерения</div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="meditation" name="goals" value="meditation">
+                            <label for="meditation" class="field-label">Развитие медитации</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="business" name="goals" value="business">
+                            <label for="business" class="field-label">Укрепление бизнеса</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sleep" name="goals" value="sleep">
+                            <label for="sleep" class="field-label">Улучшить сон</label>
+                        </div>
+                    </div>
+                </div>
 
-        // Логика для полей ввода
-        const nameInput = document.getElementById('nameInput');
-        const birthInput = document.getElementById('birthInput');
-        const genderSelect = document.getElementById('genderSelect');
-        const zodiacSign = document.getElementById('zodiacSign');
+                <div class="field-row">
+                    <div class="field-label">Другое</div>
+                    <input type="text" id="otherInput" value="" placeholder="Другое" />
+                </div>
+            </div>
 
-        // Функция определения знака зодиака
-        function getZodiacSign(dateString) {
-            const date = new Date(dateString);
-            const month = date.getMonth() + 1;
-            const day = date.getDate();
+            <button class="btn-next" id="nextBtn2">
+                Далее
+            </button>
+        </div>
+    </div>
 
-            const signs = [
-                { name: 'Козерог ♑', start: [12, 22], end: [1, 19] },
-                { name: 'Водолей ♒', start: [1, 20], end: [2, 18] },
-                { name: 'Рыбы ♓', start: [2, 19], end: [3, 20] },
-                { name: 'Овен ♈', start: [3, 21], end: [4, 19] },
-                { name: 'Телец ♉', start: [4, 20], end: [5, 20] },
-                { name: 'Близнецы ♊', start: [5, 21], end: [6, 20] },
-                { name: 'Рак ♋', start: [6, 21], end: [7, 22] },
-                { name: 'Лев ♌', start: [7, 23], end: [8, 22] },
-                { name: 'Дева ♍', start: [8, 23], end: [9, 22] },
-                { name: 'Весы ♎', start: [9, 23], end: [10, 22] },
-                { name: 'Скорпион ♏', start: [10, 23], end: [11, 21] },
-                { name: 'Стрелец ♐', start: [11, 22], end: [12, 21] }
-            ];
-
-            for (let sign of signs) {
-                if (sign.name === 'Козерог ♑') {
-                    if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
-                        return sign.name;
-                    }
-                } else {
-                    if ((month === sign.start[0] && day >= sign.start[1]) ||
-                        (month === sign.end[0] && day <= sign.end[1])) {
-                        return sign.name;
-                    }
-                }
-            }
-            return '-';
-        }
-
-        // Автоматическое определение знака зодиака при изменении даты
-        birthInput.addEventListener('change', () => {
-            const sign = getZodiacSign(birthInput.value);
-            zodiacSign.textContent = `⚝ Ваш знак зодиaкa: ${sign}`;
-            zodiacSign.classList.add('show');
-        });
-
-        // Инициализация знака зодиака при загрузке
-        const initialSign = getZodiacSign(birthInput.value);
-        zodiacSign.textContent = `⚝ Ваш знак зодиака: ${initialSign}`;
-        zodiacSign.classList.add('show');
-
-        // Обработчик кнопки "Далее"
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            alert('Переход к следующему шагу...');
-        });
-
-        // Звуковые эффекты (опционально)
-        function playAmbientSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-                // Создаем простой звон колокольчика
-                function createBell() {
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-
-                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.5);
-
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
-
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 1);
-                }
-
-                btnStart.addEventListener('click', () => {
-                    createBell();
-                });
-
-            } catch (e) {
-                // Звук недоступен
-                console.log('Web Audio API недоступен');
-            }
-        }
-
-        // Инициализация звука при первом взаимодействии
-        document.addEventListener('click', playAmbientSound, { once: true });
-    </script>
+    <!-- Экран 3: Шаг 3 -->
+    <div class="step3-screen" id="step3Screen">
+        <div class="stars-background"></div>
+        <div class="step-container">
+            <div class="step-header">📜 Шаг 3 из 3</div>
+            <div class="form-card">
+                <div class="field-row">
+                    <div class="field-label">Выбор наставника</div>
+                    <select id="mentorSelect">
+                        <option value="">Выберите</option>
+                        <option value="mentor">Мудрец</option>
+                        <option value="shaman">Шаман</option>
+                        <option value="monk">Монах</option>
+                        <option value="nun">Монахиня</option>
+                        <option value="yogi">Йогин</option>
+                        <option value="psychologist">Психолог-астролог</option>
+                    </select>
+                </div>
+                <div alt="Наставник" class="mentor-image" id="mentorImage">
+            </div>
+        </div>
+        <button class="btn-next" id="nextBtn3">
+            Далее
+        </button>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
